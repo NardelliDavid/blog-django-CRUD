@@ -1,0 +1,31 @@
+{% load static %}
+<header class="bg-light p-3">
+  <nav>
+    <a href="{% url 'index' %}"
+      ><img src="{% static 'icons/hogar.png' %}" alt="hogar.png"
+    /></a>
+    <a href="{% url 'crear_post' %}"
+      ><img src="{% static 'icons/boton-mas.png' %}" alt="boton-mas.png"
+    /></a>
+    <div class="menu-container">
+      <button>
+        <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" />
+      </button>
+      <ul id="menu" class="p-0 pt-3 pb-3">
+        <div class="rounded-2 pt-3 pb-3">
+            {% if usuario %}
+                <div class="ms-1 me-1 pb-1 border-0 border-bottom gap-2 d-flex justify-content-center align-items-center flex-column">
+                    <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" width="50px">
+                    <h5 class="text-center fw-semibold">{{usuario.nombre}}</h5>
+                </div>  
+                <li class="mt-2"><a href="{% url 'mi_cuenta_vista' %}">Mi cuenta</a></li>
+                <li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a></li>
+            {% else %}
+                <li><a href="{% url 'login_vista' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+        </div>
+      </ul>
+    </div>
+  </nav>
+</header>

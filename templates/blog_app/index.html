@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block main %}
+    {% for post in posts %}
+    <div class="hr"></div>
+        <div class="div-post">
+            <div class="w-100 d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-center gap-2">
+                    <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" class="user-img">
+                    <h4>{{post.nombre_usuario_creador}}</h4>
+                </div>
+                {% if post.creado == post.actualizado %}
+                <h6>{{post.creado}}</h1>
+                {% else %}
+                <div>
+                    <h6>{{post.actualizado}} | {{post.creado}}</h6>
+                </div>
+                {% endif %}
+            </div>
+            <p class="contenido">{{post.contenido}}</p>
+            {% if post.imagen %}
+             <img class="post-img rounded-3" src="{{ post.imagen.url }}" alt="no image">
+            {% endif %}
+            <div class="w-100 d-flex justify-content-end like-boton">
+                <button class="btn me-3 mt-3 p-0 btnGuardar" onclick="guardarPublicacion()">
+                    <img id="guardar-icono-{{ publicacion.id }}" src="{% static 'icons/no-guardado.png' %}" alt="like.png">
+                </button>
+
+            </div>
+        </div>
+        <div class="hr"></div>
+    {% empty %}
+        <h1 class="m-0 p-0 text-center bg-warning-subtle position-absolute p-3 rounded-1" style="box-shadow: 0 0 5px rgb(187, 187, 187);">No hay publicaciones disponibles</h1>
+    {% endfor %}
+{% endblock %}
+
+{% block endbody %}
+    <!--    <script src="{% static 'js/guardar_publicacion.js' %}"></script>    -->
+{% endblock %}

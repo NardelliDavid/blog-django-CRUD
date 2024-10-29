@@ -1,0 +1,70 @@
+.a-cuenta {
+  background: rgba(207, 207, 207, 0.295);
+  color: rgb(0, 110, 255);
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.1s;
+}
+.a-cuenta:hover {
+  background: rgba(216, 216, 216, 0.178);
+  color: rgb(0, 153, 255);
+}
+.h4-id {
+  color: rgb(165, 165, 165);
+}
+.btn-color {
+  font-size: 18px;
+  color: rgb(58, 58, 58);
+  background: rgb(255, 208, 0);
+  transition: 0.1s;
+}
+.btn-color:hover {
+  color: black;
+  background: rgb(255, 208, 0);
+}
+
+/* Cuando le damos click a un boton se pone opaco el fondo*/
+
+#div-fondo-opaco {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.418);
+  min-height: 110vh;
+  width: 100%;
+  transition: 0.1s ease;
+}
+.mostrar-div {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Formularios de los botones */
+
+.form-cambiar-nombre, .form-cambiar-password {
+  /* Para la animacion*/
+  opacity: 0;
+  visibility: hidden;
+  /* Normal */
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.425);
+  /* Esto lo centra */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Animacion */
+  transition: 0.05s ease;
+}
+.form-cambiar-nombre div {
+  display: flex;
+  flex-direction: column;
+}
+.mostrarForm {
+  opacity: 1;
+  visibility: visible;
+}

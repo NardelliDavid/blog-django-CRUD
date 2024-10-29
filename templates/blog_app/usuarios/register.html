@@ -1,0 +1,43 @@
+{% extends 'blog_app/form_base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block formulario %}
+<form
+      action="{% url 'recibir_registro' %}"
+      method="POST"
+      class="gap-3 rounded-3 bg-light"
+    >
+    {% csrf_token %}
+      <fieldset class="w-100 bg-primary-subtle fw-semibold h5">Registro</fieldset>
+      <div class="div-1 gap-2 ms-5 me-5">
+        <label for="input-nombre">Nombre de Usuario</label>
+        <input
+          type="text"
+          name="nombre"
+          id="input-nombre"
+          required
+          class="w-100"
+        />
+        {% if error_usuario %}
+          <h6 class="bg-danger-subtle rounded-1 p-1 d-flex gap-1">El usuario <p class="fw-semibold m-0 p-0">{{error_usuario}}</p> ya existe.</h6>
+        {% endif %}
+        <label for="input-password">Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          id="input-password"
+          required
+          class="w-100"
+        />
+      </div>
+
+      <div
+        class="div-2 gap-2 ms-5 me-5"
+      >
+        <p class="p-0 m-0">¿Ya tienes cuenta?</p>
+        <a href="{% url 'login_vista' %}" class="text-decoration-none fw-semibold">Inicia Sesion</a>
+      </div>
+      <button class="btn btn-primary ms-5 me-5 mb-4 fw-semibold">Registrarse</button>
+    </form>
+{% endblock %}

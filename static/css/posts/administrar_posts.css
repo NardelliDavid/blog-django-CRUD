@@ -1,0 +1,66 @@
+/* Fondo oscuro transparente */
+#div-fondo-oscuro {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.418);
+  top: 0;
+  min-height: 100vh;
+  width: 100%;
+  transition: 0.1s ease;
+}
+.mostrar-fondo {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+/* Confirmacion de eliminar post */
+.eliminarPostConfirmacion {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+  border: 1px solid rgb(221, 221, 221);
+  /* Centra la confirmacion en el medio de la pantalla*/
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* Formulario de editar */
+.formEditar {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+  border: 1px solid rgb(221, 221, 221);
+  /* Centra el formulario de edicion en el medio de la pantalla */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.formEditar fieldset {
+  border-bottom: 1px solid rgb(209, 209, 209);
+}
+.formEditar div {
+    display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.formEditar textarea {
+    resize: none;
+    height: 200px;
+}
+/* Muestra la confirmacion de eliminar post y el formulario de editar */
+.mostrar {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

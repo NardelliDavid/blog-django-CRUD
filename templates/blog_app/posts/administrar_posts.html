@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Administrar posts {% endblock %}
+
+{% block main %}
+    {% for post in posts %}
+        <div class="hr"></div>
+            <div class="div-post">
+                <div class="w-100 d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-center gap-2">
+                        <h4>#{{post.id}}</h4>
+                    </div>
+                    {% if post.creado == post.actualizado %}
+                    <h6>{{post.creado}}</h1>
+                    {% else %}
+                    <div>
+                        <h6>{{post.actualizado}} | {{post.creado}}</h6>
+                    </div>
+                    {% endif %}
+                </div>
+                <p class="contenido">{{post.contenido}}</p>
+                {% if post.imagen %}
+                <img class="post-img rounded-3" src="{{ post.imagen.url }}" alt="no image">
+                {% endif %}
+                <div class="mt-3">
+                    <button onclick="editarPost('{{ post.id }}')" class="btn btn-success rounded-1">Editar</button>
+                    <button onclick="eliminarPostConfirmacion('{{ post.id }}')" class="btn btn-danger rounded-1">Eliminar</button>
+                </div>
+            </div>
+            <!-- Editar post formulario-->
+             <form action="{% url 'editar_post' post.id %}" id="editarPost-{{ post.id }}" class="formEditar rounded-1" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <fieldset class="bg-success-subtle w-100 text-center h4 fw-semibold p-3">Editar publicacion</fieldset>
+                <div class="gap-3 ps-4 pe-4 pb-4 pt-1">
+                    <label for="textarea-contenido">Contenido</label>
+                    <textarea name="contenido" id="textarea-contenido" class="w-100">{{ post.contenido }}</textarea>
+                    <label for="input-img">Imagen (Opcional)</label>
+                    <input type="file" name="img" id="input-img" class="form-control">
+                    <div class="d-flex justify-content-center align-items-center flex-row p-1 gap-3">
+                        <button class="btn btn-primary rounded-1">Guardar cambios</button>
+                        <p onclick="editarPost('{{ post.id }}')" class="btn btn-danger m-0 rounded-1">Cerrar</p>
+                    </div>
+                </div>
+             </form>
+            <!-- Eliminar post formulario -->
+             <div id="eliminarPostConfirmacion-{{ post.id }}" class="p-3 rounded-1 eliminarPostConfirmacion">
+                <p>¿Estas seguro de querer eliminar esta publicacion?</p>
+                <div class="d-flex justify-content-center align-items-center flex-row gap-3">
+                    <form action="{% url 'borrar_post' post.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">Si</button>
+                    </form>
+                    <button onclick="eliminarPostConfirmacion('{{ post.id }}')" class="btn btn-primary">No</button>
+                </div>
+             </div>
+             
+        <div class="hr"></div>
+    {% empty %}
+        <h1 class="m-0 p-0 text-center">No tienes publicaciones</h1>
+    {% endfor %}
+    <!--Fondo opaco al hacer click en editar o eliminar -->
+    <div id="div-fondo-oscuro"></div>
+{% endblock %}
+
+{% block endbody %}
+<script src="{% static  'js/administrar_posts.js' %}" defer></script>
+{% endblock %}

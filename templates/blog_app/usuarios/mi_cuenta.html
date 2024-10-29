@@ -1,0 +1,90 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}Mi cuenta{% endblock %} 
+{% block main %}
+<div class="d-flex flex-column">
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="w-100 text-center p-2 mb-2 h4 rounded-1 border 
+      {% if message.tags == 'success' %}border-success-subtle bg-success-subtle text-success
+      {% elif message.tags == 'error' %}border-danger-subtle bg-danger-subtle text-danger-emphasis
+      {% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="d-flex flex-row justify-content-center align-items-center gap-4">
+    <div
+      class="d-flex justify-content-center align-items-center flex-row gap-3 pe-4 border-end"
+    >
+      <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" />
+      <div>
+        <h1>{{usuario.nombre}}</h1>
+        <h4 class="h4-id">#{{usuario.id}}</h4>
+      </div>
+    </div>
+    <div class="d-flex flex-column gap-4">
+      <button onclick="formNombre()" class="fw-semibold btn a-cuenta border">
+        Cambiar nombre
+      </button>
+      <button onclick="formPassword()" class="fw-semibold btn a-cuenta border">
+        Cambiar contraseña
+      </button>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center gap-3 mt-4 pt-4 border-top">
+    <a href="{% url 'administrar_posts' %}" class="btn fw-semibold btn-color border text-center" style="width: 65%; min-width: 330px;">
+      Administrar mis publicaciones
+    </a>
+    <a href="#" class="btn btn-primary fw-semibold border text-center" style="height: 41px;">
+      Mis me gusta
+    </a>
+  </div>
+</div>
+<!--Fondo opaco al hacer click en cualquiera de los botones-->
+<div id="div-fondo-opaco"></div>
+<!-- Formulario para cambiar el nombre -->
+<form action="{% url 'cambiar_nombre' %}" method="POST" id="formNombre" class="gap-3 border rounded-1 form-cambiar-nombre">
+  {% csrf_token %}
+  <fieldset class="w-100 bg-warning-subtle fw-semibold h5 p-3 text-center border-bottom">
+    Cambiar nombre
+  </fieldset>
+  <div class="ms-4 me-4">
+    <label for="input-nombre">Nombre nuevo</label>
+    <input type="text" name="nombre_nuevo" id="input-nombre" required />
+  </div>
+  <div class="ms-4 me-4">
+    <label for="input-password">Contraseña actual</label>
+    <input type="password" name="password" id="input-password" required />
+  </div>
+  <div class="m-3 mb-4 d-flex flex-row gap-3">
+    <button type="button" onclick="formNombre()" class="btn btn-danger fw-semibold">Cerrar</button>
+    <button type="submit" class="btn btn-primary fw-semibold">Enviar</button>
+  </div>
+</form>
+<!-- Formulario para cambiar la contraseña -->
+ <form action="{% url 'cambiar_password' %}" method="POST" id="formPassword" class="gap-3 border rounded-1 form-cambiar-password">
+  {% csrf_token %}
+  <fieldset class="w-100 bg-info-subtle fw-semibold h5 p-3 text-center border-bottom">
+    Cambiar contraseña
+  </fieldset>
+  <div class="ms-4 me-4 d-flex flex-column">
+    <label for="input-password-actual">Contraseña actual</label>
+    <input type="password" name="passwordActual" id="input-password-actual" required />
+  </div>
+  <div class="ms-4 me-4 d-flex flex-column">
+    <label for="input-password-nueva">Contraseña nueva</label>
+    <input type="password" name="passwordNueva" id="input-password-nueva" required />
+  </div>
+  <div class="m-3 mb-4 d-flex flex-row gap-3">
+    <button type="button" onclick="formPassword()" class="btn btn-danger fw-semibold">Cerrar</button>
+    <button type="submit" class="btn btn-primary fw-semibold">Enviar</button>
+  </div>
+</form>
+{% endblock %} 
+
+{% block endbody %}
+<script src="{% static  'js/mi_cuenta.js' %}" defer></script>
+{% endblock %}
