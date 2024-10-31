@@ -8,3 +8,7 @@ admin.site.register(Usuarios, UsuariosAdmin)
 class PublicacionesAdmin(admin.ModelAdmin):
     list_display=("id", "id_usuario_creador", "nombre_usuario_creador", "contenido", "imagen", "creado", "actualizado")
 admin.site.register(Publicaciones, PublicacionesAdmin)
+
+class GuardadosAdmin(admin.ModelAdmin):
+    list_display=("id", "usuario", "publicacion", "fecha_guardado")
+admin.site.register(Guardados, GuardadosAdmin)

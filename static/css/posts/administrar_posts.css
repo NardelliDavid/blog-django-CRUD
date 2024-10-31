@@ -41,6 +41,7 @@
   flex-direction: column;
   background: white;
   border: 1px solid rgb(221, 221, 221);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.425);
   /* Centra el formulario de edicion en el medio de la pantalla */
   position: fixed;
   top: 50%;

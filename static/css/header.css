@@ -44,6 +44,7 @@ nav ul {
   list-style: none;
   position: absolute;
   top: 50px;
+  transform: translateX(-52px);
 }
 nav ul div {
   background: white;

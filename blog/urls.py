@@ -40,10 +40,10 @@ urlpatterns = [
     path('administrar_posts/', views.administrar_posts, name="administrar_posts"), # Muestra las publicaciones del usuario
     path('editar_post/<int:post_id>/', views.editar_post, name="editar_post"),
     path('borrar_post/<int:post_id>/', views.borrar_post, name="borrar_post"),
-    # URL para guardar una publicacion
-    # path('guardar_publicacion/', views.guardar_publicacion, name="guardar_publicacion"),
+    path('guardar_publicacion/<int:post_id>/', views.guardar_publicacion, name="guardar_publicacion"),# URL para guardar una publicacion
     path('cambiar_password/', views.cambiar_password, name="cambiar_password"), # URL para cambiar la contraseña
     path('cambiar_nombre/', views.cambiar_nombre, name="cambiar_nombre"), # URL para cambiar el nombre
+    path('mis_guardados/', views.mis_guardados, name="mis_guardados"),
 ]
 
 if settings.DEBUG:

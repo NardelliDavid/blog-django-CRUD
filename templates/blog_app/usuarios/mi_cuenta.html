@@ -3,18 +3,6 @@
 {% block title %}Mi cuenta{% endblock %} 
 {% block main %}
 <div class="d-flex flex-column">
-  {% if messages %}
-  <div class="messages">
-    {% for message in messages %}
-      <div class="w-100 text-center p-2 mb-2 h4 rounded-1 border 
-      {% if message.tags == 'success' %}border-success-subtle bg-success-subtle text-success
-      {% elif message.tags == 'error' %}border-danger-subtle bg-danger-subtle text-danger-emphasis
-      {% endif %}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </div>
-  {% endif %}
   <div class="d-flex flex-row justify-content-center align-items-center gap-4">
     <div
       class="d-flex justify-content-center align-items-center flex-row gap-3 pe-4 border-end"
@@ -38,8 +26,8 @@
     <a href="{% url 'administrar_posts' %}" class="btn fw-semibold btn-color border text-center" style="width: 65%; min-width: 330px;">
       Administrar mis publicaciones
     </a>
-    <a href="#" class="btn btn-primary fw-semibold border text-center" style="height: 41px;">
-      Mis me gusta
+    <a href="{% url 'mis_guardados' %}" class="btn btn-primary fw-semibold border text-center" style="height: 41px;">
+      Mis Guardados
     </a>
   </div>
 </div>
@@ -83,6 +71,18 @@
     <button type="submit" class="btn btn-primary fw-semibold">Enviar</button>
   </div>
 </form>
+
+ {% if messages %}
+    {% for message in messages %}
+      <div class="d-flex justify-content-between align-items-center flex-row p-2 mb-2 rounded-1 border MSG
+      {% if message.tags == 'success' %}border-success-subtle bg-success-subtle text-success MSG-SUCCESS
+      {% elif message.tags == 'error' %}border-danger-subtle bg-danger-subtle text-danger-emphasis MSG-ERROR
+      {% endif %}{% if message.tags %}MSG-VER{% endif %}">
+        <p class="h3 m-0 p-0">{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+
 {% endblock %} 
 
 {% block endbody %}

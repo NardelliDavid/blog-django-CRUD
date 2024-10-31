@@ -13,10 +13,10 @@
                         <h4>#{{post.id}}</h4>
                     </div>
                     {% if post.creado == post.actualizado %}
-                    <h6>{{post.creado}}</h1>
+                    <h6 class="bg-info-subtle p-1 rounded-1">{{post.creado}}</h1>
                     {% else %}
                     <div>
-                        <h6>{{post.actualizado}} | {{post.creado}}</h6>
+                        <h6 class="bg-info-subtle p-1 rounded-1">{{post.actualizado}} | {{post.creado}}</h6>
                     </div>
                     {% endif %}
                 </div>
@@ -24,7 +24,7 @@
                 {% if post.imagen %}
                 <img class="post-img rounded-3" src="{{ post.imagen.url }}" alt="no image">
                 {% endif %}
-                <div class="mt-3">
+                <div class="mt-4 d-flex flex-row gap-3">
                     <button onclick="editarPost('{{ post.id }}')" class="btn btn-success rounded-1">Editar</button>
                     <button onclick="eliminarPostConfirmacion('{{ post.id }}')" class="btn btn-danger rounded-1">Eliminar</button>
                 </div>
@@ -58,7 +58,7 @@
              
         <div class="hr"></div>
     {% empty %}
-        <h1 class="m-0 p-0 text-center">No tienes publicaciones</h1>
+        <h1 class="m-0 p-0 text-center bg-warning-subtle position-absolute p-3 rounded-1" style="box-shadow: 0 0 5px rgb(187, 187, 187);">No tienes publicaciones</h1>
     {% endfor %}
     <!--Fondo opaco al hacer click en editar o eliminar -->
     <div id="div-fondo-oscuro"></div>

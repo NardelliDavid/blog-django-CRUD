@@ -2,11 +2,11 @@
 
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %} Mis guardados {% endblock %}
 
 {% block main %}
     {% for post in posts %}
-    <div class="hr"></div>
+        <div class="hr"></div>
         <div class="div-post">
             <div class="w-100 d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-center gap-2">
@@ -27,11 +27,7 @@
             {% endif %}
             <div class="w-100 d-flex justify-content-end like-boton">
                 <button class="btn me-3 mt-3 p-0 btnGuardar" onclick="guardarPublicacion(event)" id="guardar-btn" data-id="{{ post.id }}">
-                    {% if post.guardado %}
-                        <img id="guardar-icono-{{ post.id }}" src="{% static 'icons/guardado.png' %}" alt="guardado.png">
-                    {% else %}
-                        <img id="guardar-icono-{{ post.id }}" src="{% static 'icons/no-guardado.png' %}" alt="no-guardado.png">
-                    {% endif %}
+                    <img id="guardar-icono-{{ post.id }}" src="{% static 'icons/guardado.png' %}" alt="guardado.png">
                 </button>
 
             </div>

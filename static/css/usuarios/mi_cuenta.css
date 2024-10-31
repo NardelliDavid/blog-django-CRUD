@@ -26,6 +26,7 @@
 /* Cuando le damos click a un boton se pone opaco el fondo*/
 
 #div-fondo-opaco {
+  z-index: 1;
   opacity: 0;
   visibility: hidden;
   position: fixed;
@@ -46,6 +47,7 @@
   opacity: 0;
   visibility: hidden;
   /* Normal */
+  z-index: 1;
   background: white;
   display: flex;
   justify-content: center;
@@ -67,4 +69,40 @@
 .mostrarForm {
   opacity: 1;
   visibility: visible;
+}
+
+/* Mensaje al cambiar nombre o contraseña */
+
+.MSG {
+  z-index: 0;
+  position: absolute;
+  bottom: 110px;
+}
+.MSG.MSG-VER {
+  animation: slideIn 0.5s forwards ease-in-out, slideOut 0.5s 3s forwards ease-in-out;
+}
+.MSG-ERROR { /* Borde del mensaje de error */
+  border-left: 5px solid rgba(240, 52, 52, 0.856) !important;
+}
+.MSG-SUCCESS {  /* Borde del mensaje de exito */
+   border-left: 5px solid rgba(7, 214, 0, 0.856) !important;
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+  from {
+    right: -500px;
+  }
+  to {
+    right: 30px;
+  }
+}
+/* Animación de salida */
+@keyframes slideOut {
+  from {
+    right: 30px;
+  }
+  to {
+    right: -500px;
+  }
 }

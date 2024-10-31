@@ -4,8 +4,8 @@ from .models import *
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.contrib.auth.hashers import check_password
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.hashers import check_password
 
 def index(request):
     # Obtiene las publicaciones en la base de datos
@@ -14,6 +14,12 @@ def index(request):
     if 'usuario' in request.session:
         # Si hay usuario pasa los datos del mismo junto con las publicaciones
         usuario = request.session['usuario']
+        usuario_id = request.session['usuario']['id'] # Obtiene el id del usuario guardado en la sesion
+        # Obtiene los IDs de las publicaciones guardadas por el usuario
+        publicaciones_guardadas = Guardados.objects.filter(usuario_id=usuario_id).values_list('publicacion_id', flat=True)
+        # Agrega un atributo 'guardado' a cada publicación
+        for post in posts:
+            post.guardado = post.id in publicaciones_guardadas
         return render(request, "blog_app/index.html", {"posts": posts, "usuario": usuario})
     else:
         # Si no hay usuario en la sesion envia solo las publicaciones
@@ -188,52 +194,72 @@ def borrar_post(request, post_id):
     else:
         return redirect("administrar_posts")
 # Vista para guardar publicaciones
-### def guardar_publicacion(request):
-    if request.method == 'POST':
-        usuario_id = request.POST.get('usuario_id')
-        publicacion_id = request.POST.get('publicacion_id')
-        
-        # Verificar si la publicación ya está guardada
-        guardado, creado = Guardados.objects.get_or_create(
-            usuario_id=usuario_id,
-            publicacion_id=publicacion_id
-        )
-        
-        # Retornar el estado de guardado
-        if creado:
-            return JsonResponse({'status': 'guardado'})
+def guardar_publicacion(request, post_id):
+    if 'usuario' in request.session:
+        if request.method == "POST":
+            usuario_id = request.session['usuario']['id']
+            # Obtén la instancia del usuario y la publicación
+            usuario = get_object_or_404(Usuarios, id=usuario_id)
+            post = get_object_or_404(Publicaciones, id=post_id)
+            
+            try:
+                # Si existe un guardado lo elimina
+                guardado = Guardados.objects.get(usuario=usuario, publicacion=post)
+                guardado.delete()
+                estado = "eliminado"
+            except ObjectDoesNotExist:
+                # Si no existe crea un nuevo guardado
+                guardado = Guardados.objects.create(usuario=usuario, publicacion=post)
+                guardado.save()
+                estado = "guardado"
+            # Devuelve una respuesta JSON
+            return JsonResponse({"estado": estado})
         else:
-            # Si ya está guardado, eliminar el guardado (función de alternancia)
-            guardado.delete()
-            return JsonResponse({'status': 'no_guardado'})
-
-    return JsonResponse({'status': 'error'}, status=400)
-###
+            return JsonResponse({"error": "GET"}, status=403)
+    else:
+        return JsonResponse({"error": "No has iniciado sesion"}, status=401)
 # Vista para cambiar el nombre
 def cambiar_nombre(request):
     if request.method == "POST":
         nombre_actual = request.session['usuario']['nombre']
         nombre_nuevo = request.POST['nombre_nuevo'].strip()
-        password_actual = request.POST['password'].strip()
+        password = request.POST['password'].strip()
         
         if nombre_actual == nombre_nuevo:
-            print("Los nombres son iguales")
+            messages.error(request, "El nuevo nombre es igual al anterior.")
             return redirect('mi_cuenta_vista')
         else:
             try:
-                # Obtiene la fila donde esta el usuario
-                usuario = Usuarios.objects.get(nombre=nombre_actual)
-                if check_password(password_actual, usuario.password): # Verifica la contraseña
-                    # Cambia el nombre de usuario por el nuevo
-                    usuario.nombre = nombre_nuevo
-                    usuario.save()
-                    
-                    print("nombre cambiado correctamente.")
-                    # Redirige al login para iniciar sesion con el nuevo nombre
-                    return redirect('cerrar_sesion')
-                else:
-                    print("Contraseña incorrecta")
+                # Verifica si ya existe un usuario con el mismo nombre
+                if Usuarios.objects.filter(nombre=nombre_nuevo).exclude(nombre=nombre_actual).exists():
+                    messages.error(request, "Ya existe un usuario con ese nombre.")
                     return redirect('mi_cuenta_vista')
+                else:
+                    # Obtiene la fila donde esta el usuario
+                    usuario = Usuarios.objects.get(nombre=nombre_actual)
+                    if check_password(password, usuario.password): # Verifica la contraseña
+                        # Elimina la sesion
+                        logout(request)
+                        
+                        # Actualiza el nombre de usuario
+                        Usuarios.objects.filter(nombre=nombre_actual).update(nombre=nombre_nuevo)
+                        
+                        # Actualiza el nombre en las publicaciones del usuario
+                        Publicaciones.objects.filter(id_usuario_creador=usuario).update(nombre_usuario_creador=nombre_nuevo)
+                        
+                        # Obtiene el id del usuario e inicia una nueva sesion
+                        id_usuario = usuario.id  
+                        request.session['usuario'] = {
+                            'id': id_usuario,
+                            'nombre': nombre_nuevo,
+                        }
+                        
+                        # Mensaje y redireccion
+                        messages.success(request, "Nombre cambiado correctamente.")
+                        return redirect('mi_cuenta_vista')
+                    else:
+                        messages.error(request, "La contraseña es incorrecta.")
+                        return redirect('mi_cuenta_vista')
             except ObjectDoesNotExist:
                 return redirect('mi_cuenta_vista')
     else:
@@ -254,9 +280,9 @@ def cambiar_password(request):
                 usuario = Usuarios.objects.get(nombre=nombre)  # Intenta obtener el usuario
                 # Verifica la contraseña
                 if check_password(passwordActual, usuario.password):  # Verifica la contraseña cifrada
-                    # Guarda la contraseña nueva
-                    usuario.password = passwordNueva
-                    usuario.save()
+                    # Cifra y guarda la contraseña nueva
+                    passwordNueva = make_password(passwordNueva)
+                    Usuarios.objects.filter(nombre=nombre).update(password=passwordNueva)
                     # Mensaje y redireccion
                     messages.success(request, "Contraseña cambiada correctamente.")
                     return redirect('mi_cuenta_vista')
@@ -267,3 +293,15 @@ def cambiar_password(request):
                 return redirect('mi_cuenta_vista')
     else:
         return redirect('mi_cuenta_vista')
+# Pagina de guardados
+def mis_guardados(request):
+    if 'usuario' in request.session:
+        usuario = request.session['usuario']
+        usuario_id = request.session['usuario']['id']
+        guardados = Guardados.objects.filter(usuario=usuario_id).order_by('-fecha_guardado') # Filtra los guardados por el id del usuario
+        
+        posts = [guardado.publicacion for guardado in guardados]
+       
+        return render(request, "blog_app/posts/mis_guardados.html", {"posts": posts, "usuario": usuario})
+    else:
+        return redirect('login_vista')

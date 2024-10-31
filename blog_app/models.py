@@ -33,4 +33,4 @@ class Guardados(models.Model):
     fecha_guardado = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('usuario', 'publicacion')  # Evita guardar la misma publicación más de una vez
+        unique_together = ('usuario', 'publicacion')
