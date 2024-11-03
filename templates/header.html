@@ -7,22 +7,24 @@
     <a href="{% url 'crear_post' %}"
       ><img src="{% static 'icons/boton-mas.png' %}" alt="boton-mas.png"
     /></a>
-    <div class="menu-container">
+    <div class="menu-container d-flex align-items-center justify-content-center">
       <button>
         <img src="{% static 'icons/menu.png' %}" alt="usuario.png" />
       </button>
       <ul id="menu" class="p-0 pt-3 pb-3">
-        <div class="rounded-2 pt-3 pb-3" style="box-shadow: 0 0 5px rgb(199, 199, 199);">
+        <div class="rounded-2 pt-3 pb-3" style="box-shadow: 0 0 5px rgb(199, 199, 199); max-width: 180px;">
             {% if usuario %}
                 <div class="ms-1 me-1 pb-1 border-0 border-bottom gap-2 d-flex justify-content-center align-items-center flex-column">
                     <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" width="50px">
                     <h5 class="text-center fw-semibold">{{usuario.nombre}}</h5>
-                </div>  
-                <li class="mt-2"><a href="{% url 'mi_cuenta_vista' %}" class="text-primary">Mi cuenta</a></li>
-                <li><a href="{% url 'cerrar_sesion' %}" class="text-danger">Cerrar Sesion</a></li>
+                </div>
+                <li class="mt-2"><a href="{% url 'administrar_posts' %}"><img src="{% static 'icons/post.png' %}"><p class="p-0 m-0">Mis posts</p></a></li>
+                <li><a href="{% url 'mis_guardados' %}"><img src="{% static 'icons/guardado.png' %}"><p class="p-0 m-0">Guardados</p></a></li>
+                <li><a href="{% url 'mi_cuenta_vista' %}"><img src="{% static 'icons/settings.png' %}"><p class="p-0 m-0">Mi cuenta</p></a></li>
+                <li><a href="{% url 'cerrar_sesion' %}"><img src="{% static 'icons/logout.png' %}"><p class="p-0 m-0">Cerrar Sesion</p></a></li>
             {% else %}
-                <li><a href="{% url 'login_vista' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login_vista' %}">Iniciar Sesion</a></li>
+                <li><a href="{% url 'register' %}">Registrarse</a></li>
             {% endif %}
         </div>
       </ul>

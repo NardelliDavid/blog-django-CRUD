@@ -8,11 +8,11 @@
         action="{% url 'recibir_post' %}"
         method="POST"
         enctype="multipart/form-data"
-        class="gap-3 rounded-3 bg-light"
+        class="gap-3 rounded-3 bg-light m-3"
       >
   {% if usuario %}
   {% csrf_token %}
-        <fieldset class="w-100 bg-success-subtle fw-semibold h5 text-center">Crear publicacion</fieldset>
+        <fieldset class="w-100 bg-success-subtle fw-semibold h5 d-flex justify-content-center align-items-center"><p class="m-0 p-0">Crear publicacion</p></fieldset>
         <div class="div-1 gap-2 ms-5 me-5">
           <label for="textarea-contenido">Contenido</label>
           <textarea name="contenido" id="textarea-contenido" class="w-100"></textarea>

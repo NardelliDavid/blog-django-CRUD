@@ -17,6 +17,7 @@ nav {
   gap: 20px;
 }
 nav a {
+  text-shadow: 0 0 2px rgb(199, 199, 199);
   text-decoration: none;
   color: black;
   font-size: 18px;
@@ -33,18 +34,19 @@ nav button img {
   margin: 0;
   width: 35px;
   height: 35px;
-  filter: invert(15%);
 }
 
 /* Menu desplegable */
 
+.menu-container:hover #menu {
+  display: flex;
+}
 nav ul {
   display: none;
   flex-direction: column;
   list-style: none;
   position: absolute;
   top: 50px;
-  transform: translateX(-52px);
 }
 nav ul div {
   background: white;
@@ -52,12 +54,22 @@ nav ul div {
 }
 nav ul div li {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 5px 15px 5px 15px;
 }
+nav ul div li a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  gap: 10px;
+}
+nav ul div li a img {
+  width: 25px;
+  height: 25px;
+}
 nav ul li:hover {
   background: rgb(212, 212, 212);
-}
-.menu-container:hover #menu {
-  display: flex;
 }

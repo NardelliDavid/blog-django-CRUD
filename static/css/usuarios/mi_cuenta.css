@@ -1,3 +1,6 @@
+.div-miCuenta {
+  width: 90%;
+}
 .a-cuenta {
   background: rgba(207, 207, 207, 0.295);
   color: rgb(0, 110, 255);
@@ -9,18 +12,22 @@
   background: rgba(216, 216, 216, 0.178);
   color: rgb(0, 153, 255);
 }
-.h4-id {
+.text-gray-css {
   color: rgb(165, 165, 165);
 }
-.btn-color {
-  font-size: 18px;
-  color: rgb(58, 58, 58);
-  background: rgb(255, 208, 0);
-  transition: 0.1s;
+.boton-borrar {
+  font-family: Lato, Helvetica, sans-serif;
+  font-size: 22px;
+  border-radius: 5px;
+  color: rgba(177, 52, 52, 0.651);
+  border: 1px solid rgba(182, 0, 0, 0.219);
+  background: rgba(255, 0, 0, 0.11);
+  transition: 0.05s ease;
 }
-.btn-color:hover {
-  color: black;
-  background: rgb(255, 208, 0);
+.boton-borrar:hover {
+  color: rgb(206, 0, 0);
+  border: 1px solid rgba(182, 0, 0, 0.562);
+  background: rgba(255, 0, 0, 0.199);
 }
 
 /* Cuando le damos click a un boton se pone opaco el fondo*/
@@ -77,6 +84,7 @@
   z-index: 0;
   position: absolute;
   bottom: 110px;
+  white-space: nowrap;
 }
 .MSG.MSG-VER {
   animation: slideIn 0.5s forwards ease-in-out, slideOut 0.5s 3s forwards ease-in-out;

@@ -5,9 +5,9 @@
 {% block title %}Inicio{% endblock %}
 
 {% block main %}
-    {% for post in posts %}
     <div class="hr"></div>
-        <div class="div-post">
+    {% for post in posts %}
+        <div class="div-post ps-3 pe-3">
             <div class="w-100 d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-center gap-2">
                     <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" class="user-img">

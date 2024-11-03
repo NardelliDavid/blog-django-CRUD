@@ -5,9 +5,9 @@
 {% block title %} Administrar posts {% endblock %}
 
 {% block main %}
+    <div class="hr"></div>
     {% for post in posts %}
-        <div class="hr"></div>
-            <div class="div-post">
+            <div class="div-post w-100 ps-3 pe-3">
                 <div class="w-100 d-flex justify-content-between align-items-center">
                     <div class="d-flex justify-content-center gap-2">
                         <h4>#{{post.id}}</h4>
@@ -58,7 +58,7 @@
              
         <div class="hr"></div>
     {% empty %}
-        <h1 class="m-0 p-0 text-center bg-warning-subtle position-absolute p-3 rounded-1" style="box-shadow: 0 0 5px rgb(187, 187, 187);">No tienes publicaciones</h1>
+        <h1 class="m-0 p-0 text-center bg-warning-subtle position-absolute p-3 rounded-1" style="box-shadow: 0 0 5px rgb(187, 187, 187);">No tienes publicaciones creadas</h1>
     {% endfor %}
     <!--Fondo opaco al hacer click en editar o eliminar -->
     <div id="div-fondo-oscuro"></div>
