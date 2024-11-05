@@ -26,6 +26,8 @@ Esta aplicación web de blogs permite a los usuarios registrados crear, editar y
 <hr style="margin: 20px 0;" />
 
 ### Instalacion:
+   ```pip install django```
+
    ```python -m venv venv```
 
    ```venv\Scripts\activate``` o ```venv\Scripts\activate.bat```
