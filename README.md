@@ -31,6 +31,8 @@ Esta aplicación web de blogs permite a los usuarios registrados crear, editar y
    ```venv\Scripts\activate``` o ```venv\Scripts\activate.bat```
 
    ```pip install -r requirements.txt```
+   
+   ```python manage.py migrate```
 
    ```python manage.py runserver```
    
