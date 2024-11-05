@@ -11,6 +11,13 @@ class Usuarios(models.Model):
         if self.password:
             self.password = make_password(self.password)
         super().save(*args, **kwargs)
+        
+    def delete(self, *args, **kwargs):
+        # Elimina las imágenes de las publicaciones del usuario del sistema de archivos antes de borrar el usuario
+        for publicacion in self.publicaciones.all():
+            if publicacion.imagen and os.path.isfile(publicacion.imagen.path):
+                os.remove(publicacion.imagen.path)
+        super().delete(*args, **kwargs)
 
 class Publicaciones(models.Model):
     id_usuario_creador = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='publicaciones')

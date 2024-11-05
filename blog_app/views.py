@@ -305,3 +305,27 @@ def mis_guardados(request):
         return render(request, "blog_app/posts/mis_guardados.html", {"posts": posts, "usuario": usuario})
     else:
         return redirect('login_vista')
+# Borrar cuenta
+def borrar_cuenta(request):
+    if request.method == "POST":
+        if 'usuario' in request.session:
+            pass1 = request.POST['password'].strip()
+            pass2 = request.POST['passwordConfirmar'].strip()
+            if pass1 == pass2:
+                usuario_id = request.session['usuario']['id'] # Obtiene el id de la sesion
+                usuario = Usuarios.objects.get(id=usuario_id) # Obtiene al usuario por el id de la sesion
+                if check_password(pass1, usuario.password):
+                    logout(request) # Elimina la sesion antes eliminar al usuario
+                    usuario.delete() # Elimina al usuario y registros relacionados
+                    return redirect('register') # Redirige al formulario de registro
+                else:
+                    messages.error(request, "La contraseña es incorrecta.")
+                    return redirect('mi_cuenta_vista')
+            else:
+                messages.error(request, "Las contraseñas no coinciden.")
+                return redirect('mi_cuenta_vista')
+        else:
+            return redirect('login_vista')
+    else:
+        messages.error(request, "El metodo no es POST.")
+        return redirect('mi_cuenta_vista')

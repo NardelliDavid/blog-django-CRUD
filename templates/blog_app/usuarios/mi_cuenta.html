@@ -23,7 +23,7 @@
         Cambiar contraseña
       </button>
     </div>
-    <button class="w-100 boton-borrar">Borrar mi cuenta</button>
+    <button class="w-100 boton-borrar" onclick="formBorrarCuenta()">Borrar mi cuenta</button>
   </div>
 </div>
 <!--Fondo opaco al hacer click en cualquiera de los botones-->
@@ -31,7 +31,7 @@
 <!-- Formulario para cambiar el nombre -->
 <form action="{% url 'cambiar_nombre' %}" method="POST" id="formNombre" class="gap-3 border rounded-1 form-cambiar-nombre">
   {% csrf_token %}
-  <fieldset class="w-100 bg-warning-subtle fw-semibold h5 p-3 text-center border-bottom">
+  <fieldset class="w-100 bg-success-subtle fw-semibold h5 p-3 text-center border-bottom">
     Cambiar nombre
   </fieldset>
   <div class="ms-4 me-4">
@@ -66,6 +66,36 @@
     <button type="submit" class="btn btn-primary fw-semibold">Enviar</button>
   </div>
 </form>
+<!-- Formulario de borrar cuenta -->
+ <form action="{% url 'borrar_cuenta' %}" method="POST" id="formBorrarCuenta" class="gap-3 border rounded-1 form-borrar-cuenta">
+  {% csrf_token %}
+  <div class="d-flex justify-content-center align-items-center flex-column gap-3 w-100" id="div-form">
+    <fieldset class="w-100 bg-danger-subtle fw-semibold h5 p-3 text-center border-bottom">
+      Borrar cuenta
+    </fieldset>
+    <div class="ms-4 me-4 d-flex flex-column">
+      <label for="input-password1">Contraseña</label>
+      <input type="password" name="password" id="input-password1" required />
+    </div>
+    <div class="ms-4 me-4 d-flex flex-column">
+      <label for="input-password2">Confirmar contraseña</label>
+      <input type="password" name="passwordConfirmar" id="input-password2" required />
+    </div>
+    <div class="m-3 mb-4 d-flex flex-row gap-3">
+      <button type="button" onclick="formBorrarCuenta()" class="btn btn-danger fw-semibold">Cerrar</button>
+      <button type="button" onclick="mostrarConfirmacion()" class="btn btn-primary fw-semibold">Enviar</button>
+    </div>
+  </div>
+  <!-- Confirmacion de eliminar cuenta -->
+  <div class="d-none justify-content-center align-items-center flex-column p-3 gap-3" id="div-confirmacion">
+    <p class="m-0 p-0 text-center">¿Esta seguro de querer eliminar su cuenta?<br>
+    Todas sus publicaciones se borraran para siempre</p>
+    <div class="d-flex flex-row gap-3">
+      <button type="button" onclick="cancelarBoton()" class="btn btn-primary">No</button>
+      <button type="submit" class="btn btn-danger">Si</button>
+    </div>
+  </div>
+ </form>
 
  {% if messages %}
     {% for message in messages %}

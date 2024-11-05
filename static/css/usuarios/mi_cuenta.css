@@ -49,7 +49,7 @@
 
 /* Formularios de los botones */
 
-.form-cambiar-nombre, .form-cambiar-password {
+.form-cambiar-nombre, .form-cambiar-password, .form-borrar-cuenta {
   /* Para la animacion*/
   opacity: 0;
   visibility: hidden;
@@ -76,6 +76,13 @@
 .mostrarForm {
   opacity: 1;
   visibility: visible;
+}
+/* Formulario de borrar cuenta */
+.ocultar-div-form {
+  display: none !important;
+}
+#div-confirmacion.mostrar-confirmacion {
+  display: flex !important;
 }
 
 /* Mensaje al cambiar nombre o contraseña */
