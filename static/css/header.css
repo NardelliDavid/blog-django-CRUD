@@ -41,6 +41,12 @@ nav button img {
 .menu-container:hover #menu {
   display: flex;
 }
+h5 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 nav ul {
   display: none;
   flex-direction: column;

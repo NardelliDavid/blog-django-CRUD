@@ -8,11 +8,18 @@
   font-size: 18px;
   transition: 0.1s;
 }
+.h2-name {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .a-cuenta:hover {
   background: rgba(216, 216, 216, 0.178);
   color: rgb(0, 153, 255);
 }
 .text-gray-css {
+  text-align: end;
   color: rgb(165, 165, 165);
 }
 .boton-borrar {
