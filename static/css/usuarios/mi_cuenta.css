@@ -1,6 +1,10 @@
 .div-miCuenta {
   width: 90%;
 }
+input {
+  border-radius: 5px;
+  border: 1px solid black;
+}
 .a-cuenta {
   background: rgba(207, 207, 207, 0.295);
   color: rgb(0, 110, 255);
@@ -87,6 +91,9 @@
 /* Formulario de borrar cuenta */
 .ocultar-div-form {
   display: none !important;
+}
+#div-confirmacion p {
+  white-space: nowrap;
 }
 #div-confirmacion.mostrar-confirmacion {
   display: flex !important;

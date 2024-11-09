@@ -9,15 +9,15 @@
     {% for post in posts %}
         <div class="div-post ps-3 pe-3">
             <div class="w-100 d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center gap-2 w-50">
+                <div class="d-flex align-items-center justify-content-center gap-2 w-50">
                     <img src="{% static 'icons/usuario.png' %}" alt="usuario.png" class="user-img">
-                    <h4>{{post.nombre_usuario_creador}}</h4>
+                    <h4 class="m-0">{{post.nombre_usuario_creador}}</h4>
                 </div>
                 {% if post.creado == post.actualizado %}
                 <h6 class="bg-info-subtle p-1 rounded-1">{{post.creado}}</h1>
                 {% else %}
                 <div>
-                    <h6 class="bg-info-subtle p-1 rounded-1" style="min-width: 275px;">{{post.actualizado}} | {{post.creado}}</h6>
+                    <h6 class="bg-info-subtle p-1 rounded-1">{{post.actualizado}} | {{post.creado}}</h6>
                 </div>
                 {% endif %}
             </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="hr"></div>
     {% empty %}
-        <h1 class="m-0 p-0 text-center bg-warning-subtle position-absolute p-3 rounded-1" style="box-shadow: 0 0 5px rgb(187, 187, 187);">No hay publicaciones disponibles</h1>
+        <h1 class="m-0 p-0 text-center bg-warning-subtle position-absolute p-3 m-3 rounded-1" style="box-shadow: 0 0 5px rgb(187, 187, 187);">No hay publicaciones disponibles</h1>
     {% endfor %}
 {% endblock %}
 

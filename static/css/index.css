@@ -25,8 +25,18 @@ h4 {
   text-overflow: ellipsis;
 }
 h6 {
-    min-width: 135px;
+  font-size: 15px;
+  white-space: nowrap;
+  min-width: 135px;
   color: gray;
+}
+@media (max-width: 576px) {
+  h4 {
+    font-size: 15px;
+  }
+  h6 {
+    font-size: 12px;
+  }
 }
 .user-img {
   width: 30px;

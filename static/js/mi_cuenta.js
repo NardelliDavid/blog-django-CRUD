@@ -16,7 +16,7 @@ function mostrarConfirmacion() {
   const pass1 = document.getElementById("input-password1").value.trim();
   const pass2 = document.getElementById("input-password2").value.trim();
   if (pass1 == "" || pass2 == "") { // Si 1 de los campos esta vacio no muestra la confirmacion
-    alert("Complete los datos restantes")
+    alert("Complete los datos faltantes!")
   } else { // Si ambos campos tienen contenido se muestra la confirmacion
     document.getElementById("div-form").classList.toggle("ocultar-div-form");
     document

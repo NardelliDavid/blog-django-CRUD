@@ -15,6 +15,7 @@
 }
 /* Confirmacion de eliminar post */
 .eliminarPostConfirmacion {
+  white-space: nowrap; /* El texto se queda en una sola linea */
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
@@ -32,6 +33,7 @@
 }
 /* Formulario de editar */
 .formEditar {
+  min-width: 350px;
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
