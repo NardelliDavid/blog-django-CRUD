@@ -26,15 +26,17 @@ Esta aplicación web de blogs permite a los usuarios registrados crear, editar y
 <hr style="margin: 20px 0;" />
 
 ### Instalacion:
-   ```python -m venv venv```
+   1. Instalar python
 
-   ```venv\Scripts\activate``` o ```venv\Scripts\activate.bat```
+   2. ```python -m venv venv```
 
-   ```pip install -r requirements.txt```
+   3. ```venv\Scripts\activate``` o ```venv\Scripts\activate.bat```
+
+   4. ```pip install -r requirements.txt```
    
-   ```python manage.py migrate```
+   5. ```python manage.py migrate```
 
-   ```python manage.py runserver```
+   6. ```python manage.py runserver```
    
 
 <hr style="margin: 20px 0;" />
